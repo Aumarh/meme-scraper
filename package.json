@@ -45,7 +45,8 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
-    "cheerio": "^1.0.0-rc.10",
-    "request-promise": "^4.2.6"
+    "fetch": "^1.1.0",
+    "fs": "^0.0.1-security",
+    "jsdom": "^19.0.0"
   }
 }
