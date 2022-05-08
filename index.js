@@ -3,6 +3,21 @@ import * as fs from 'fs';
 import https from 'https';
 import fetch from 'node-fetch';
 
+// accessing the url
+const response = await fetch(
+  'https://memegen-link-examples-upleveled.netlify.app/',
+);
+const data = await response.text();
+
+let i = '';
+const url = [];
+const str = data;
+const rex = /<img[^>]+src="?([^"\s]+)"?\s*\/>/g;
+
+while ((i = rex.exec(str))) {
+  url.push(i[1]);
+}
+
 // creating the meme folder
 const path = './memes';
 
@@ -24,21 +39,6 @@ fs.access(path, (error) => {
   }
 });
 
-// accessing the url
-const response = await fetch(
-  'https://memegen-link-examples-upleveled.netlify.app/',
-);
-const data = await response.text();
-
-let i = '';
-const url = [];
-const str = data;
-const rex = /<img[^>]+src="?([^"\s]+)"?\s*\/>/g;
-
-while ((i = rex.exec(str))) {
-  url.push(i[1]);
-}
-
 // loop for download
 for (let i = 0; i < 10; i++) {
   if (i < 9) {
@@ -49,6 +49,8 @@ for (let i = 0; i < 10; i++) {
     https.get(url[i], function (answer) {
       answer.pipe(file);
     });
+
+    // enduring it doesn't return an error on multiple runs
   } else {
     fs.mkdir('./memes', { recursive: true }, function () {});
     const fileName = `memes/${i + 1}.jpg`;
