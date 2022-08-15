@@ -2,7 +2,7 @@
 
 ```
 node index.js
-(/01.jpg)
+(/memes/01.jpg)
 
 ```
 
